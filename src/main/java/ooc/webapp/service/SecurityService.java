@@ -41,11 +41,9 @@ public class SecurityService {
     public boolean addUser(String username, String password){
       return userCredentials.put(username, password);
     }
-    public void removeUser(HttpServletRequest request){
-        String username = (String) request.getSession()
-                .getAttribute("username");
+
+    public void removeUser(String username){
         userCredentials.remove(username);
-        request.setAttribute("username", null);
     }
 
     public Iterable<String> getListOfUser(){
@@ -54,6 +52,10 @@ public class SecurityService {
     
     public void logout(HttpServletRequest request) {
         request.getSession().invalidate();
+    }
+
+    public String getUserTable(){
+        return userCredentials.getUserTable();
     }
     
 }

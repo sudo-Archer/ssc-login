@@ -4,6 +4,13 @@
 <html>
 <body>
 <h2>Welcome, ${username}</h2>
+<style>
+
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
 <h3> List of usernames:${userList}</h3>
 
 
@@ -13,10 +20,6 @@
     </form>
     <form action="/addUser" method="get">
             <button name="action" value="addUser">Add user</button>
-    </form>
-
-    <form action="/confirmationPage" method="get">
-        <button name="action" value="removeUser">Remove User</button>
     </form>
 
 </body>

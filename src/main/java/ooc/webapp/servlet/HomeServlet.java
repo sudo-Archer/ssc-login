@@ -36,7 +36,7 @@ public class HomeServlet extends AbstractRoutableHttpServlet {
             String username = (String) request.getSession().getAttribute("username");
 
             request.setAttribute("username", username);
-            request.setAttribute("userList", securityService.getListOfUser());
+            request.setAttribute("userList", securityService.getUserTable());
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/home.jsp");
             rd.include(request, response);
         } else {

@@ -10,12 +10,15 @@ import java.io.IOException;
 
 public class ConfirmationPageServlet extends AbstractRoutableHttpServlet {
 
+    String goingToRemove;
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean authorized = securityService.isAuthorized(request);
         if (authorized) {
+            goingToRemove = request.getParameter("remove");
+            request.setAttribute("removeUser", goingToRemove);
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/confirmationPage.jsp");
             rd.include(request, response);
         } else {
@@ -28,7 +31,7 @@ public class ConfirmationPageServlet extends AbstractRoutableHttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String button = request.getParameter("action");
         if(button.equals("Yes")){
-            securityService.removeUser(request);
+            securityService.removeUser(goingToRemove);
         }
         response.sendRedirect("/index.jsp");
     }

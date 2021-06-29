@@ -2,10 +2,7 @@ package ooc.webapp.service;
 
 import javax.xml.crypto.Data;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class DatabaseConnector {
 
@@ -103,5 +100,24 @@ public class DatabaseConnector {
             e.printStackTrace();
         }
 
+    }
+
+    public String getUserTable(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<table style=\"width:40%\">");
+        stringBuilder.append("<tr><th>Username:</th><th>buttons</th></tr>");
+        for (String entry : usernames){
+            stringBuilder.append("<tr><th>" + entry + "</th><th>"+button(entry)+"</th></tr>");
+        }
+        stringBuilder.append("</table>");
+        return stringBuilder.toString();
+    }
+
+    private String button(String username){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<form action=\"/confirmationPage\" method=\"get\">\n" +
+                "            <button name=\"remove\" value=\""+username+"\">Remove</button>");
+        stringBuilder.append("</form>");
+        return stringBuilder.toString();
     }
 }
