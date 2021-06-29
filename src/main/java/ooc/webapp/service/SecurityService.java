@@ -20,6 +20,8 @@ public class SecurityService {
     
     private DatabaseConnector userCredentials = new DatabaseConnector();
 
+    private Hashing hashing = new Hashing();
+
     public boolean isAuthorized(HttpServletRequest request) {
         String username = (String) request.getSession()
                 .getAttribute("username");
@@ -29,7 +31,7 @@ public class SecurityService {
     
     public boolean authenticate(String username, String password, HttpServletRequest request) {
         String passwordInDB = userCredentials.get(username);
-        boolean isMatched = StringUtils.equals(password, passwordInDB);
+        boolean isMatched = hashing.verifyPassword(password, passwordInDB);
         if (isMatched) {
             request.getSession().setAttribute("username", username);
             return true;
@@ -39,7 +41,7 @@ public class SecurityService {
     }
 
     public boolean addUser(String username, String password){
-      return userCredentials.put(username, password);
+      return userCredentials.put(username, hashing.getHash(password));
     }
 
     public void removeUser(String username){
