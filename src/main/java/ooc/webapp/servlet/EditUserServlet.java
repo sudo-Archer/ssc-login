@@ -30,6 +30,7 @@ public class EditUserServlet extends AbstractRoutableHttpServlet{
         String info = request.getParameter("info");
         String name = request.getParameter("name");
         securityService.EditInfo(request, info);
+        securityService.EditName(request, name);
         response.sendRedirect("/index.jsp");
     }
 }

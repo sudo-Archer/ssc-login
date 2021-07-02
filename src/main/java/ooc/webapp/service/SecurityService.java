@@ -56,4 +56,8 @@ public class SecurityService {
     public String getUserInfo(HttpServletRequest request) {
         return userCredentials.getUserInfo((String) request.getSession().getAttribute("username"));
     }
+
+    public void EditName(HttpServletRequest request, String name) {
+        userCredentials.EditName((String) request.getSession().getAttribute("username"), name);
+    }
 }
