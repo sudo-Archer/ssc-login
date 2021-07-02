@@ -28,6 +28,7 @@ public class EditUserServlet extends AbstractRoutableHttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String info = request.getParameter("info");
+        String name = request.getParameter("name");
         securityService.EditInfo(request, info);
         response.sendRedirect("/index.jsp");
     }
