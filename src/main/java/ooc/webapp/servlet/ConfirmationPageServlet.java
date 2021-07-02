@@ -15,6 +15,7 @@ public class ConfirmationPageServlet extends AbstractRoutableHttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("hit");
         boolean authorized = securityService.isAuthorized(request);
         if (authorized) {
             goingToRemove = request.getParameter("remove");

@@ -5,10 +5,13 @@
 
         <form action="/addUser" method="post">
             Username:<br/>
-            <input type="text" name="username"/>
-            <br/>
+            <input type="text" name="username"/> <br/>
             Password:<br/>
-            <input type="password" name="password">
+            <input type="password" name="password"> <br/>
+            Name:<br/>
+            <input type="text" name="name"> <br/>
+            Info:<br/>
+            <input type="text" name="info">
             <br><br>
             <input type="submit" value="Submit">
         </form>

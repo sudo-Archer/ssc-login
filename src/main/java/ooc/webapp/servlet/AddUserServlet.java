@@ -33,8 +33,13 @@ public class AddUserServlet extends AbstractRoutableHttpServlet {
 
         String username= request.getParameter("username");
         String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String info = request.getParameter("info");
 
-        if(securityService.addUser(username, password)){
+        if(name==null){
+            userMessage = "Name can not be null";
+        }
+        else if(securityService.addUser(username, password, name, info)){
             userMessage = "User has been added";
         }
         else {

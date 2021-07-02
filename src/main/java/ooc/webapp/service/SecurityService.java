@@ -5,12 +5,7 @@
  */
 package ooc.webapp.service;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -30,7 +25,7 @@ public class SecurityService {
     }
     
     public boolean authenticate(String username, String password, HttpServletRequest request) {
-        String passwordInDB = userCredentials.get(username);
+        String passwordInDB = userCredentials.getPassword(username);
         boolean isMatched = hashing.verifyPassword(password, passwordInDB);
         if (isMatched) {
             request.getSession().setAttribute("username", username);
@@ -39,25 +34,26 @@ public class SecurityService {
             return false;
         }
     }
-
-    public boolean addUser(String username, String password){
-      return userCredentials.put(username, hashing.getHash(password));
+    public boolean addUser(String username, String password, String name, String info){
+      return userCredentials.insert(username, hashing.getHash(password), name, info);
     }
-
     public void removeUser(String username){
         userCredentials.remove(username);
     }
 
-    public Iterable<String> getListOfUser(){
-        return userCredentials.getUsernameSet();
-    }
-    
     public void logout(HttpServletRequest request) {
         request.getSession().invalidate();
     }
 
-    public String getUserTable(){
-        return userCredentials.getUserTable();
+    public String getUserTable(String username){
+        return userCredentials.getUserTable(username);
     }
-    
+
+    public void EditInfo(HttpServletRequest request, String info) {
+        userCredentials.EditInfo((String) request.getSession().getAttribute("username"), info);
+    }
+
+    public String getUserInfo(HttpServletRequest request) {
+        return userCredentials.getUserInfo((String) request.getSession().getAttribute("username"));
+    }
 }
