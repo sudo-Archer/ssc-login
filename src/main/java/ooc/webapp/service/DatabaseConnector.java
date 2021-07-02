@@ -18,7 +18,7 @@ public class DatabaseConnector {
 
     private Connection connect() throws SQLException, ClassNotFoundException {
         Connection con=DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/ssc-demo","ssc","a1234f");
+                    "jdbc:mysql://localhost:3306/ssc","ssc","FindM9dad");
             return con;
     }
 
