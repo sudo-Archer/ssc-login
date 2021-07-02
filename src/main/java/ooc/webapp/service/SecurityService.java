@@ -60,4 +60,8 @@ public class SecurityService {
     public void EditName(HttpServletRequest request, String name) {
         userCredentials.EditName((String) request.getSession().getAttribute("username"), name);
     }
+
+    public String getName(HttpServletRequest request) {
+        return userCredentials.getName((String) request.getSession().getAttribute("username"));
+    }
 }

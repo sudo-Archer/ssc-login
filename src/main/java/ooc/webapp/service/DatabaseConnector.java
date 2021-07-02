@@ -189,6 +189,27 @@ public class DatabaseConnector {
         return null;
     }
 
+    public String getName(String username) {
+        try {
+            Connection con = connect();
+            Statement statement = con.createStatement();
+            String name = null;
+            StringBuilder select = new StringBuilder();
+            select.append("SELECT name FROM users WHERE username=");
+            select.append("'"+username+"'");
+            ResultSet rs = statement.executeQuery(select.toString());
+            if(rs.next()){
+                name = rs.getString(1);
+            }
+            return name;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void EditName(String username, String name) {
         try {
             Connection con = connect();

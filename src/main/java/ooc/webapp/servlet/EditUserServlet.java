@@ -17,6 +17,7 @@ public class EditUserServlet extends AbstractRoutableHttpServlet{
         boolean authorized = securityService.isAuthorized(request);
         if (authorized) {
             request.setAttribute("userinfo", securityService.getUserInfo(request));
+            request.setAttribute("name", securityService.getName(request));
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/editInfo.jsp");
             rd.include(request, response);
         } else {
