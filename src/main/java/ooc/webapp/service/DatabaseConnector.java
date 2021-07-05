@@ -228,4 +228,23 @@ public class DatabaseConnector {
         }
     }
 
+    public boolean EditUsername(String username, String newUsername) {
+        try {
+            Connection con = connect();
+            Statement statement = con.createStatement();
+            StringBuilder update = new StringBuilder();
+            update.append("UPDATE users SEt username=");
+            update.append("'"+newUsername+"' WHERE username=");
+            update.append("'"+username+"'");
+            statement.executeUpdate(update.toString());
+            System.out.println(update);
+            con.close();
+            return true;
+        } catch (SQLException throwables) {
+            return false;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

@@ -26,6 +26,9 @@ public class SecurityService {
     
     public boolean authenticate(String username, String password, HttpServletRequest request) {
         String passwordInDB = userCredentials.getPassword(username);
+        if (passwordInDB == null){
+            return false;
+        }
         boolean isMatched = hashing.verifyPassword(password, passwordInDB);
         if (isMatched) {
             request.getSession().setAttribute("username", username);
@@ -63,5 +66,13 @@ public class SecurityService {
 
     public String getName(HttpServletRequest request) {
         return userCredentials.getName((String) request.getSession().getAttribute("username"));
+    }
+
+    public boolean EditUsername(HttpServletRequest request, String newUsername) {
+        if(userCredentials.EditUsername((String) request.getSession().getAttribute("username"), newUsername)){
+            request.getSession().setAttribute("username", newUsername);
+            return true;
+        }
+        return false;
     }
 }
