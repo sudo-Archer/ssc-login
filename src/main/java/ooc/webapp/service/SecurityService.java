@@ -25,10 +25,10 @@ public class SecurityService {
     }
     
     public boolean authenticate(String username, String password, HttpServletRequest request) {
-        String passwordInDB = userCredentials.getPassword(username);
-        if (passwordInDB == null){
+        if (!userCredentials.getUsernameSet().contains(username)){
             return false;
         }
+        String passwordInDB = userCredentials.getPassword(username);
         boolean isMatched = hashing.verifyPassword(password, passwordInDB);
         if (isMatched) {
             request.getSession().setAttribute("username", username);
