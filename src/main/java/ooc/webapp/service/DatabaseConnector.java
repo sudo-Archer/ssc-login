@@ -159,7 +159,6 @@ public class DatabaseConnector {
             update.append("'"+info+"' WHERE username=");
             update.append("'"+username+"'");
             statement.executeUpdate(update.toString());
-            System.out.println(update);
             con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -219,7 +218,6 @@ public class DatabaseConnector {
             update.append("'"+name+"' WHERE username=");
             update.append("'"+username+"'");
             statement.executeUpdate(update.toString());
-            System.out.println(update);
             con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -237,7 +235,6 @@ public class DatabaseConnector {
             update.append("'"+newUsername+"' WHERE username=");
             update.append("'"+username+"'");
             statement.executeUpdate(update.toString());
-            System.out.println(update);
             con.close();
             usernames.remove(username);
             usernames.add(newUsername);
