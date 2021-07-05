@@ -239,6 +239,8 @@ public class DatabaseConnector {
             statement.executeUpdate(update.toString());
             System.out.println(update);
             con.close();
+            usernames.remove(username);
+            usernames.add(newUsername);
             return true;
         } catch (SQLException throwables) {
             return false;
